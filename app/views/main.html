@@ -1,0 +1,65 @@
+
+<div class ="row">
+
+  <div class="col-xs-12 col-sm-1" style="padding: 0">
+    <img src="images/home.jpg" style="max-width: 75px; width: 50%; margin: 5px;" ng-click="resetSelection()"/>
+  </div>
+
+  <div class="col-xs-12 col-sm-6">
+    <div class="row" style="margin-bottom: 5px">
+      <div class="col-xs-12 col-sm-12 col-lg-6">
+
+        <div class="col-xs-3" ng-repeat="category in categories"
+        ng-click="setSelectedCategory(category)"
+        ng-mouseover="setMouseOverCategory(category)"
+        ng-mouseleave="setMouseOverCategory(null)">
+          <img ng-src="{{category == selectedCategory && category.preview || category.previewGray}}" style="width: 100%; " />
+          <p class="text-center"  style="height: 20px; margin: -10px -100px 5px -100px ">
+            <span ng-show="category == mouseOverCategory || selectedLocation.category == category.name" class="label label-default" style="background-color: #3e8fdb">{{category.name}}</span>
+          </p>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-lg-6" style="">
+          <div class="col-xs-3" ng-repeat="country in countries" ng-click="setSelectedCountry(country)"
+          ng-mouseover="setMouseOverCountry(country)"
+          ng-mouseleave="setMouseOverCountry(null)">
+          <img ng-src="{{country == selectedCountry && country.preview|| country.previewGray}}" style="width: 100%;" />
+          <!-- ng-class="{ grayscale: country != selectedCountry}" -->
+          <p class="text-center"  style="height: 20px; margin: -10px -100px 5px -100px ">
+            <span ng-show="country == mouseOverCountry || selectedLocation.country == country.name" class="label label-default" style="background-color: #f64737">{{country.name}}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" >
+      <div class="col-xs-3 col-sm-3 cold-md-3 col-lg-2"
+      ng-repeat="location in filteredLocations"
+      ng-click="setSelectedLocation(location)"
+      ng-mouseover="setMouseOverLocation(location)"
+      ng-mouseleave="setMouseOverLocation(null)">
+        <img ng-src="{{location.preview}}" style="width: 100%" ng-class="{ grayscale: location != selectedLocation}" alt="location.name "></img>
+        <p class="text-center" style="height: 20px; margin: -10px  -100px 5px -100px ">
+          <span ng-show="location == mouseOverLocation || location == selectedLocation" class="label label-default" ng-style="{'background-color': location.color}">{{location.name}}</span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-5" >
+    <div class="row" style="margin-top: 20px; ">
+      <div class="col-x-12" >
+          <div style="height: 90vh" width="100%">
+            <img ng-src="{{selectedLocation.image}}" ng-click="nextLocation(1)" ng-swipe-left="nextLocation(1)" ng-swipe-right="nextLocation(-1)"
+            class="img-responsive center-block" style="max-width: 100%; max-height: 100% "></img>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div  style="margin: 10px 0 10px 0 ">
+    <button type="button" class="btn btn-xs btn-default" ng-click="toggleShowImpressum()" ng-show="!showImpressum">Impressum</button>
+    <small ng-show="showImpressum" ng-click="toggleShowImpressum()">Robin Bougardier | 45143 Essen |  kontakt[at]urbex-cartoons.de</small>
+</div>
